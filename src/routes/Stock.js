@@ -6,6 +6,7 @@ import { SearchBar } from "../sitecomponent/SearchBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Select from "react-select";
 import "../App.css";
+import { keys } from "../../config/key";
 
 const columns = [
   { headerName: "Symbol", field: "symbol", sortable: true, flex: 1 },
@@ -16,7 +17,6 @@ const columns = [
 ];
 
 function Stock() {
-  const apiKey = "d5c8d1b31e007be468b929cb49029618"; // api key for symbol name and price FB
   //define the state
   //data for aggrid
   const [rowData, setRowData] = useState([]);
@@ -33,7 +33,7 @@ function Stock() {
   // getting the stock information
   async function getStockInfo() {
     let res = await fetch(
-      `https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey=${apiKey}`
+      `https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey=${keys.FPM_Key}`
     );
     let data = await res.json();
     return data.map(({ symbol, name, sector, headQuarter, founded }) => {

@@ -9,6 +9,7 @@ import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import "../App.css";
+import { keys } from "../../config/key";
 
 function LineChart() {
   // define the column name and value for Ag-grid
@@ -46,7 +47,6 @@ function LineChart() {
     { headerName: "Volume", field: "volume", sortable: true, flex: 1 },
   ];
   // define the varible
-  const apiKey = "T2WRF3631LIYO9K8";
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [rowData, setRowData] = useState([]);
@@ -63,7 +63,9 @@ function LineChart() {
   //getting data from API
   async function getPriceInfo() {
     let res = await fetch(
-      `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${state.selectedSymbol.toUpperCase()}&apikey=${apiKey}`
+      `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${state.selectedSymbol.toUpperCase()}&apikey=${
+        keys.ALP_Key
+      }`
     );
     let data = await res.json();
     if (Object.keys(data) == "Error Message") {
